@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sinatra skeleton</title>
     <link rel="stylesheet" type="text/css" href="/style.css?<%=Time.now.to_i%>"> 
+    <link rel="stylesheet" type="text/css" href="/temp-style.css?<%=Time.now.to_i%>"> 
 </head>
 <body>
     <header>
-        <h1>Fruktsidan</h1>
-        <div class="header-links">
-            <a class="new-elev-link" href="/elever/new">Ny frukt</a>
-            <a class="all-elevs-link" href="/elever">Frukter</a>
+        <div class="top">
+            <div class="topButton">
+                <button id="homeButton" onClick="window.location.href = '/elever'"></button>
+            </div>
+            <div class="topMain">
+                <h1 class="top">Välkommen</h1>
+                <form action="/elever/search" method="POST" class="top">
+                    <input id="elev-name" name="elev-name" class="top" type="text" placeholder="Sök efter elev"/>
+                    <input class="topSubmit" type="submit" value="">
+                </form>
+            </div>
         </div>
     </header>
     <main>

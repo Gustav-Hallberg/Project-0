@@ -17,6 +17,13 @@ class App < Sinatra::Base
     get "/elever/new" do
         erb :"elever/new"
     end
+
+    post "/elever/search" do 
+        name = params["elev-name"];
+        sql = "SELECT * FROM elever WHERE name=?"
+        @elev = db.execute(sql, name).first
+        erb :"elever/show"
+    end
     
     # Show info about 1 specific elev
     get "/elever/:id" do | id |
