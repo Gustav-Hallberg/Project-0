@@ -1,0 +1,4 @@
+#TODO
+1. Fixa så att man inte crashar när man trycker tillbaka/nästa i show när man kommer till ett index som inte finns.
+2. Lägg till spelet
+3. CSS MAGIC
