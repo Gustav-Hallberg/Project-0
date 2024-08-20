@@ -10,7 +10,6 @@ class App < Sinatra::Base
 
     get "/elever" do
         @elever = db.execute("SELECT * FROM elever")
-        p @elever
         erb :"elever/index"
     end
 
@@ -19,9 +18,14 @@ class App < Sinatra::Base
     end
 
     post "/elever/search" do 
-        name = params["elev-name"];
+        name = params["elev-name"].capitalize();
         sql = "SELECT * FROM elever WHERE name=?"
+
         @elev = db.execute(sql, name).first
+
+        if(@elev == nil)
+            redirect("/elever")
+        end
 
         redirect("/elever/#{@elev["id"]}")
     end
@@ -47,7 +51,6 @@ class App < Sinatra::Base
 
     # Remove elever in db
     post '/elever/:id/delete' do | id |
-        p id
         sql = "DELETE FROM elever WHERE id=?"
         db.execute(sql, id)
 
