@@ -37,9 +37,10 @@ class App < Sinatra::Base
     post "/elever" do
         name = params["elev_name"]
         description = params["elev_description"]
+        age = params["elev_age"]
 
-        sql = "INSERT INTO elever (name, description) VALUES(?,?)"
-        db.execute(sql, [name, description])
+        sql = "INSERT INTO elever (name, age, description) VALUES(?,?,?)"
+        db.execute(sql, [name, age, description])
 
         redirect("/elever")
     end
