@@ -1,12 +1,15 @@
-<ul>
-    <% @elever.each do | f | %>
-        <div class="elev-cards">
-            <a class="elev-names" href="/elever/<%=f["id"]%>"><%=f["name"]%></a>
-            <a class="elev-change" href="/elever/<%=f["id"]%>/edit">Ändra</a>
-            <form action="/elever/<%=f["id"]%>/delete" method="post">
-                <input class="elev-delete-button" type="submit" value="Ta Bort">
-            </form>
+<div class="index">
+    <div class="elever">
+        <h2 class="elever">Elever:</h2>
+        <div class="elever-list">
+            <ul>
+                <% @elever.each do | f | %>
+                    <li><h3 class="elev-list-item"> <%= f["name"]%> </h3></li>
+                <% end %>
+            </ul>
         </div>
-    <% end %>
-</ul>
-
+    </div>
+    <div class="run-game">
+        <button class="run-game">Kör spel!</button>
+    </div>
+</div>

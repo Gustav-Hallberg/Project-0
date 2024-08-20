@@ -18,6 +18,28 @@ div.topMain {
     width: calc(100% - 2em);
     padding-right: 2em;
 }
+div.index {
+    display: flex;
+    width: 100%;
+}
+div.elever {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 100%
+}
+div.elever-list {
+    overflow-y: scroll;
+    max-height: 500px;
+}
+div.run-game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
 #homeButton {
     margin: 0;
     height: 3em;
@@ -33,6 +55,13 @@ div.topMain {
 }
 h1.top {
     margin: 0;
+}
+h2.elever {
+    margin: 0;
+}
+h3.elev-list-item {
+    margin: 0;
+    font-weight: normal;
 }
 form.top {
     display: flex;
@@ -56,4 +85,9 @@ input.topSubmit {
 
     border-top-right-radius: 30%;
     border-bottom-right-radius: 30%;
+}
+button.run-game {
+    font-size: xx-large;
+    color: black;
+    background-color: greenyellow;
 }
