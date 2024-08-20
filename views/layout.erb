@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinatra skeleton</title>
+    <link rel="stylesheet" type="text/css" href="/style.css?<%=Time.now.to_i%>"> 
+</head>
+<body>
+    <header>
+        <h1>Fruktsidan</h1>
+        <div class="header-links">
+            <a class="new-fruit-link" href="/fruits/new">Ny frukt</a>
+            <a class="all-fruits-link" href="/fruits">Frukter</a>
+        </div>
+    </header>
+    <main>
+        <%= yield %>
+    </main>
+    <footer>
+        <h2>Sidfoten</h2>
+    </footer>
+</body>
+</html>

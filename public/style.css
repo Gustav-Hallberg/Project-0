@@ -1,0 +1,63 @@
+body {
+    font-family: serif;
+}
+
+h1,
+h2,
+h3 {
+    font-family: sans-serif;
+}
+
+.fruit-names {
+    font-weight: bold;
+    list-style: none;
+}
+
+.header-links {
+    margin: 5px;
+    padding: 5px;
+}
+
+.fruit-cards {
+    display: inline-flex;
+    margin: 10px;
+    padding: 15px;
+    border: black solid 2px;
+    border-radius: 5px;
+    width: 20%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fruit-delete-button {
+    padding: 5px;
+    text-align: center;
+    font-size: bold;
+    color:red;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.fruit-delete-button:hover {
+    background-color: red;
+    color: white;
+}
+
+.fruit-cards .fruit-change {
+    padding: 5px;
+    text-align: center;
+    color:green;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.fruit-cards .fruit-change:hover {
+    background-color: green;
+    color: white;
+}

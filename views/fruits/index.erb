@@ -1,0 +1,12 @@
+<ul>
+    <% @fruits.each do | f | %>
+        <div class="fruit-cards">
+            <a class="fruit-names" href="/fruits/<%=f["id"]%>"><%=f["name"]%></a>
+            <a class="fruit-change" href="/fruits/<%=f["id"]%>/edit">Ändra</a>
+            <form action="/fruits/<%=f["id"]%>/delete" method="post">
+                <input class="fruit-delete-button" type="submit" value="Ta Bort">
+            </form>
+        </div>
+    <% end %>
+</ul>
+
