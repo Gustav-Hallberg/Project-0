@@ -1,4 +1,23 @@
-<h2>Fruktinfo</h2>
+<h2 class="elev-show-subheader">Elev Info</h2>
 
-<p><strong><%= @elev["name"]%></strong></p>
-<p><%= @elev["description"]%></p>
+<div class="elev-show-container">
+    <div class="elev-show-info-container">
+        <div class="elev-show-image-container">
+            <img src='../images/<%= @elev["id"]%>.jpeg' alt="Profilbild för elev">
+        </div>
+
+        <div class="elev-show-personal-container">
+            <div class="elev-show-name-container">
+                <p><%= @elev["name"]%>, <%= @elev["age"]%></p>
+            </div>
+
+            <div class="elev-show-desc-container">
+                <p class="elev-show-desc"><%= @elev["description"]%></p>
+            </div>
+        </div>
+    </div>
+    <div class="elev-show-button-container">
+        <a class="elev-show-back-button" href="">&#8592 Tillbaka</a>
+        <a class="elev-show-next-button" href="">Nästa &#8594</a>
+    </div>
+</div>
