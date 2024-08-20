@@ -1,0 +1,7 @@
+<h2>Uppdatera Frukt</h2>
+
+<form action="/elever/<%=@elev["id"]%>/update" method="post">
+    <label>Frukt <input type="text" name="elev_name" value="<%= @elev["name"]%>"></label>
+    <label>Beskrivning <input type="text" name="elev_description"value="<%= @elev["description"]%>"></label>
+    <input type="submit" value="Spara">
+</form>

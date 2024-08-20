@@ -8,57 +8,57 @@ class App < Sinatra::Base
         return @db
     end
 
-    get "/fruits" do
-        @fruits = db.execute("SELECT * FROM fruits")
-        p @fruits
-        erb :"fruits/index"
+    get "/elever" do
+        @elever = db.execute("SELECT * FROM elever")
+        p @elever
+        erb :"elever/index"
     end
 
-    get "/fruits/new" do
-        erb :"fruits/new"
+    get "/elever/new" do
+        erb :"elever/new"
     end
     
-    # Show info about 1 specific fruit
-    get "/fruits/:id" do | id |
-        sql = "SELECT * FROM fruits WHERE id=?"
-        @fruit = db.execute(sql, id).first
-        erb :"fruits/show"
+    # Show info about 1 specific elev
+    get "/elever/:id" do | id |
+        sql = "SELECT * FROM elever WHERE id=?"
+        @elev = db.execute(sql, id).first
+        erb :"elever/show"
     end
 
-    # Adds new fruit to db
-    post "/fruits" do
-        name = params["fruit_name"]
-        description = params["fruit_description"]
+    # Adds new elev to db
+    post "/elever" do
+        name = params["elev_name"]
+        description = params["elev_description"]
 
-        sql = "INSERT INTO fruits (name, description) VALUES(?,?)"
+        sql = "INSERT INTO elever (name, description) VALUES(?,?)"
         db.execute(sql, [name, description])
 
-        redirect("/fruits")
+        redirect("/elever")
     end
 
-    # Remove fruits in db
-    post '/fruits/:id/delete' do | id |
+    # Remove elever in db
+    post '/elever/:id/delete' do | id |
         p id
-        sql = "DELETE FROM fruits WHERE id=?"
+        sql = "DELETE FROM elever WHERE id=?"
         db.execute(sql, id)
 
-        redirect("/fruits")
+        redirect("/elever")
     end
 
-    # Updates fruit in db
-    get '/fruits/:id/edit' do | id |
-        sql = "SELECT * FROM fruits WHERE id=?"
-        @fruit = db.execute(sql, id).first
-        erb :"fruits/update"
+    # Updates elev in db
+    get '/elever/:id/edit' do | id |
+        sql = "SELECT * FROM elever WHERE id=?"
+        @elev = db.execute(sql, id).first
+        erb :"elever/update"
     end
 
-    post "/fruits/:id/update" do | id |
-        name = params["fruit_name"]
-        description = params["fruit_description"]
+    post "/elever/:id/update" do | id |
+        name = params["elev_name"]
+        description = params["elev_description"]
 
-        sql = "UPDATE fruits SET name=?, description=? WHERE id=?"
+        sql = "UPDATE elever SET name=?, description=? WHERE id=?"
         db.execute(sql, [name, description, id])
 
-        redirect("/fruits/#{id}")
+        redirect("/elever/#{id}")
     end
 end

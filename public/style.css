@@ -8,7 +8,7 @@ h3 {
     font-family: sans-serif;
 }
 
-.fruit-names {
+.elev-names {
     font-weight: bold;
     list-style: none;
 }
@@ -18,7 +18,7 @@ h3 {
     padding: 5px;
 }
 
-.fruit-cards {
+.elev-cards {
     display: inline-flex;
     margin: 10px;
     padding: 15px;
@@ -29,7 +29,7 @@ h3 {
     align-items: center;
 }
 
-.fruit-delete-button {
+.elev-delete-button {
     padding: 5px;
     text-align: center;
     font-size: bold;
@@ -40,12 +40,12 @@ h3 {
     cursor: pointer;
 }
 
-.fruit-delete-button:hover {
+.elev-delete-button:hover {
     background-color: red;
     color: white;
 }
 
-.fruit-cards .fruit-change {
+.elev-cards .elev-change {
     padding: 5px;
     text-align: center;
     color:green;
@@ -57,7 +57,7 @@ h3 {
 }
 
 
-.fruit-cards .fruit-change:hover {
+.elev-cards .elev-change:hover {
     background-color: green;
     color: white;
 }

@@ -1,0 +1,12 @@
+<ul>
+    <% @elever.each do | f | %>
+        <div class="elev-cards">
+            <a class="elev-names" href="/elever/<%=f["id"]%>"><%=f["name"]%></a>
+            <a class="elev-change" href="/elever/<%=f["id"]%>/edit">Ändra</a>
+            <form action="/elever/<%=f["id"]%>/delete" method="post">
+                <input class="elev-delete-button" type="submit" value="Ta Bort">
+            </form>
+        </div>
+    <% end %>
+</ul>
+
