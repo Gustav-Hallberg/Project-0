@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="elev-show-button-container">
-        <a class="elev-show-back-button" href="">&#8592 Tillbaka</a>
-        <a class="elev-show-next-button" href="">Nästa &#8594</a>
+        <a class="elev-show-back-button" href="/elever/<%= @elev["id"].to_i-1%>">&#8592 Tillbaka</a>
+        <a class="elev-show-next-button" href="/elever/<%= @elev["id"].to_i+1%>">Nästa &#8594</a>
     </div>
 </div>

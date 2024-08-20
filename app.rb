@@ -22,7 +22,8 @@ class App < Sinatra::Base
         name = params["elev-name"];
         sql = "SELECT * FROM elever WHERE name=?"
         @elev = db.execute(sql, name).first
-        erb :"elever/show"
+
+        redirect("/elever/#{@elev["id"]}")
     end
     
     # Show info about 1 specific elev
