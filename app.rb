@@ -87,6 +87,9 @@ class App < Sinatra::Base
         description = params["elev_description"]
         age = params["elev_age"]
         elev_class = params["elev_class"]
+        elev_image = params["elev_image"]
+
+        p elev_image
 
         sql = "INSERT INTO elever (name, age, description, class) VALUES(?,?,?,?)"
         db.execute(sql, [name, age, description, elev_class])
