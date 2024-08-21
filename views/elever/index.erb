@@ -3,8 +3,15 @@
         <h2 class="elever">Elever:</h2>
         <div class="elever-list">
             <ul>
+                <% @currentClass = "" %>
                 <% @elever.each do | f | %>
-                    <li class="elev-list"><a class="elev-list-item" href="elever/<%=f["id"]%>"> <%= f["name"]%> </a></li>
+                    <% if f["class"] == @currentClass%>
+                        <li class="elev-list"><a class="elev-list-item" href="elever/<%=f["id"]%>"> <%= f["name"]%> </a></li>
+                    <% else %>
+                        <% @currentClass = f["class"] %>
+                        <p><%=@currentClass%></p>
+                        <li class="elev-list"><a class="elev-list-item" href="elever/<%=f["id"]%>"> <%= f["name"]%> </a></li>
+                    <% end %>
                 <% end %>
             </ul>
         </div>

@@ -9,7 +9,8 @@ class App < Sinatra::Base
     end
 
     get "/elever" do
-        @elever = db.execute("SELECT * FROM elever")
+        @elever = db.execute("SELECT * FROM elever ORDER BY class, name ASC")
+        p @elever
         erb :"elever/index"
     end
 
@@ -67,9 +68,10 @@ class App < Sinatra::Base
         name = params["elev_name"]
         description = params["elev_description"]
         age = params["elev_age"]
+        elev_class = params["elev_class"]
 
-        sql = "INSERT INTO elever (name, age, description) VALUES(?,?,?)"
-        db.execute(sql, [name, age, description])
+        sql = "INSERT INTO elever (name, age, description, class) VALUES(?,?,?,?)"
+        db.execute(sql, [name, age, description, elev_class])
 
         redirect("/elever")
     end
