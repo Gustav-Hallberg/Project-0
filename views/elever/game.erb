@@ -3,21 +3,81 @@
 <div class="elev-show-container">
     <div class="elev-show-info-container">
         <div class="elev-show-image-container">
-            <img src='../images/<%= @elev["id"]%>.jpeg' alt="Profilbild för elev">
+            <img id="elev-show-image" src='' alt="Profilbild för elev">
         </div>
 
         <div class="elev-show-personal-container">
             <div class="elev-show-name-container">
-                <p><%= @elev["name"]%>, <%= @elev["age"]%></p>
+                <input id="elev-guess-name" class="elev-guess-name" type="text" placeholder="Gissa personen">
+                <p style="display: none" id="elev-show-name-age"></p>
             </div>
 
             <div class="elev-show-desc-container">
-                <p class="elev-show-desc"><%= @elev["description"]%></p>
+                <p id="elev-show-desc" class="elev-show-desc"></p>
             </div>
         </div>
     </div>
-    <div class="elev-show-button-container">
-        <a class="elev-show-back-button" href="/elever/<%= @elev["id"].to_i-1%>">&#8592 Tillbaka</a>
-        <a class="elev-show-next-button" href="/elever/<%= @elev["id"].to_i+1%>">Nästa &#8594</a>
-    </div>
 </div>
+
+<p id="elever-info" style="display: none" ><%= @result %></p>
+
+<script> 
+    let elever = JSON.parse(document.getElementById("elever-info").textContent);
+    var previusElev = null;
+
+    if (elever == null) {
+        window.location.href = "elever";
+    }
+
+    function nextElev(elever, previusElev) {
+        let nextElev = -1;
+        while (nextElev == -1 || nextElev == previusElev) {
+            nextElev = Math.floor(Math.random() * elever.length - 1);
+        }
+        return nextElev;
+    }
+
+    function showElev(elever, nextElevNumber) {
+        let image = document.getElementById("elev-show-image");
+        let nameAge = document.getElementById("elev-show-name-age");
+        let description = document.getElementById("elev-show-desc");
+        let input = document.getElementById("elev-guess-name");
+
+        image.src = "../images/" + elever[nextElevNumber].id + ".jpeg";
+        nameAge.textContent = "Rätt svar: " + elever[nextElevNumber].name + ", " + elever[nextElevNumber].age;
+        description.textContent = elever[nextElevNumber].description;
+    }
+
+    var nextElevNumber = nextElev(elever, previusElev);
+
+    showElev(elever, nextElevNumber)
+
+    let nameAge = document.getElementById("elev-show-name-age");
+    let input = document.getElementById("elev-guess-name");
+    
+    input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            if (input.value == elever[nextElevNumber].name) {
+                input.value = "";
+                previusElev = nextElevNumber;
+                nextElevNumber = nextElev(elever, previusElev);
+                showElev(elever, nextElevNumber);
+            }
+            else {
+                input.value = "";
+                nameAge.style.display = "block";
+                input.style.display = "none";
+                setTimeout(() => {
+                    previusElev = nextElevNumber;
+                    nextElevNumber = nextElev(elever, previusElev);
+                    showElev(elever, nextElevNumber);
+                    nameAge.style.display = "none";
+                    input.style.display = "block";
+                }, 3000);
+                
+            }
+        }
+    });
+    
+</script>
