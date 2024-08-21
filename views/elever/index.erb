@@ -4,12 +4,12 @@
         <div class="elever-list">
             <ul>
                 <% @elever.each do | f | %>
-                    <li><h3 class="elev-list-item"> <%= f["name"]%> </h3></li>
+                    <li class="elev-list"><a class="elev-list-item" href="elever/<%=f["id"]%>"> <%= f["name"]%> </a></li>
                 <% end %>
             </ul>
         </div>
     </div>
     <div class="run-game">
-        <button class="run-game">Kör spel!</button>
+        <button class="run-game" href="game.erb">Kör spel!</button>
     </div>
 </div>

@@ -71,10 +71,17 @@ h1.top {
 h2.elever {
     margin: 0;
 }
-h3.elev-list-item {
+a.elev-list-item {
     margin: 0;
-    font-weight: normal;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
 }
+
+.elev-list {
+    list-style: none;
+}
+
 form.top {
     display: flex;
     align-items: center;
