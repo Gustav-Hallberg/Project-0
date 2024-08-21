@@ -17,6 +17,10 @@ class App < Sinatra::Base
         erb :"elever/new"
     end
 
+    get "/elever/game" do
+        erb :"elever/game"
+    end
+
     post "/elever/search" do 
         name = params["elev-name"].capitalize();
         sql = "SELECT * FROM elever WHERE name=?"
