@@ -19,24 +19,40 @@
     </div>
 </div>
 
+<!-- Only there to be able to pass the sql result to the client -->
 <p id="elever-info" style="display: none" ><%= @result %></p>
 
 <script> 
+    // Receves the elever data
     let elever = JSON.parse(document.getElementById("elever-info").textContent);
     var previusElev = null;
 
+    // In case elever dont exist return user to start page
     if (elever == null) {
-        window.location.href = "elever";
+        window.location.href = "/elever";
     }
 
+    // function to get next elev to show
     function nextElev(elever, previusElev) {
         let nextElev = -1;
-        while (nextElev == -1 || nextElev == previusElev) {
-            nextElev = Math.floor(Math.random() * elever.length);
+        
+        /* 
+            If there is only one elev there can only be 0.
+            Because of that previus will always be the same as next and crash the program
+        */
+        if (elever.length != 1) {
+            while (nextElev == -1 || nextElev == previusElev) {
+                nextElev = Math.floor(Math.random() * elever.length);
+            }
+        } 
+        else {
+            nextElev = 0;
         }
+        
         return nextElev;
     }
 
+    // Shows the elev with the index thats given
     function showElev(elever, nextElevNumber) {
         let image = document.getElementById("elev-show-image");
         let nameAge = document.getElementById("elev-show-name-age");
@@ -49,29 +65,36 @@
     }
 
     var nextElevNumber = nextElev(elever, previusElev);
-
     showElev(elever, nextElevNumber)
-
+ 
     let nameAge = document.getElementById("elev-show-name-age");
-    let input = document.getElementById("elev-guess-name");
-    
+    let input = document.getElementById("elev-guess-name");    
+
+    // Building an event lisener to check if ansers are correct or not
     input.addEventListener("keypress", function(event) {
+        // Checks if user pressed Enter
         if (event.key === "Enter") {
             event.preventDefault();
+            // Checks if input is correct
             if (input.value.toLowerCase() == elever[nextElevNumber].name.toLowerCase()) {
                 input.value = "";
+                // Building next elev
                 previusElev = nextElevNumber;
                 nextElevNumber = nextElev(elever, previusElev);
                 showElev(elever, nextElevNumber);
             }
             else {
                 input.value = "";
+                // Show correct answer
                 nameAge.style.display = "block";
                 input.style.display = "none";
+                // Wait 3s before showing next elev
                 setTimeout(() => {
+                    // Building next elev
                     previusElev = nextElevNumber;
                     nextElevNumber = nextElev(elever, previusElev);
                     showElev(elever, nextElevNumber);
+                    // Removing correct answer
                     nameAge.style.display = "none";
                     input.style.display = "block";
                 }, 3000);

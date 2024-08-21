@@ -8,27 +8,32 @@ class App < Sinatra::Base
         return @db
     end
 
+    # Elever start page
     get "/elever" do
         @elever = db.execute("SELECT * FROM elever ORDER BY class, name ASC")
         erb :"elever/index"
     end
 
+    # Shows page to make new elev
     get "/elever/new" do
         erb :"elever/new"
     end
 
+    # Show elever game for all classes
     get "/elever/game" do 
         sql = "SELECT * FROM elever"
         @result = db.execute(sql).to_json
         erb :"elever/game"
     end
 
+    # Show elever game for a spesific class
     get "/elever/game/:class" do | selectedClass | 
         sql = "SELECT * FROM elever WHERE class=?"
         @result = db.execute(sql, selectedClass).to_json
         erb :"elever/game"
     end
 
+    # Show elever in a spesific class
     get "/elever/class/:class" do | selectedClass | 
         sql = "SELECT * FROM elever WHERE class=? ORDER BY name ASC"
         @elever = db.execute(sql, selectedClass)
@@ -36,6 +41,7 @@ class App < Sinatra::Base
         erb :"elever/class"
     end
 
+    # Handels user search
     post "/elever/search" do 
         search = params["elev-search"];
         sql = "SELECT * FROM elever WHERE name=?"
@@ -105,13 +111,14 @@ class App < Sinatra::Base
         redirect("/elever")
     end
 
-    # Updates elev in db
+    # Gives page to update elev in db
     get '/elever/:id/edit' do | id |
         sql = "SELECT * FROM elever WHERE id=?"
         @elev = db.execute(sql, id).first
         erb :"elever/update"
     end
 
+    # Updates elev in db
     post "/elever/:id/update" do | id |
         name = params["elev_name"]
         description = params["elev_description"]
