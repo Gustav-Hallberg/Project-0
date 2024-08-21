@@ -44,9 +44,9 @@ class App < Sinatra::Base
 
         if(@elev == nil)
             sql = "SELECT * FROM elever WHERE class=?"
-            @class = db.execute(sql, search).first
+            @class = db.execute(sql, search.upcase).first
             if(@class != nil)
-                redirect("/elever/class/#{search}")
+                redirect("/elever/class/#{search.upcase}")
             end
 
             redirect("/elever")
