@@ -36,8 +36,27 @@ class App < Sinatra::Base
     
     # Show info about 1 specific elev
     get "/elever/:id" do | id |
-        sql = "SELECT * FROM elever WHERE id=?"
-        @elev = db.execute(sql, id).first
+        elev_sql = "SELECT * FROM elever WHERE id=?"
+        @elev = db.execute(elev_sql, id).first
+
+        elever_count_sql = "SELECT id FROM elever ORDER BY id DESC LIMIT 1"
+        @elev_count = db.execute(elever_count_sql)
+
+        @next_page = 1
+        @previous_page = 1
+
+        if id.to_i+1 > @elev_count[0]["id"]
+            @next_page = 1
+        else
+            @next_page = id.to_i+1
+        end
+
+        if id.to_i-1 <= 0
+            @previous_page = @elev_count[0]["id"]
+        else
+            @previous_page = id.to_i-1
+        end
+
         erb :"elever/show"
     end
 
