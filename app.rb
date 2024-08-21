@@ -17,7 +17,9 @@ class App < Sinatra::Base
         erb :"elever/new"
     end
 
-    get "/elever/game" do
+    get "/elever/game" do 
+        sql = "SELECT * FROM elever"
+        @result = db.execute(sql).to_json
         erb :"elever/game"
     end
 
