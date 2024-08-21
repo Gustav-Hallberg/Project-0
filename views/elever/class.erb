@@ -1,0 +1,15 @@
+<div class="index">
+    <div class="elever">
+        <h2 class="elever">Elever:</h2>
+        <div class="elever-list">
+            <ul>
+                <% @elever.each do | f | %>
+                    <li class="elev-list"><a class="elev-list-item" href="/elever/<%=f["id"]%>"> <%= f["name"]%> </a></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+    <div class="run-game">
+        <button class="run-game" onClick="window.location.href = '/elever/game/<%=@class%>'">Kör spel!</button>
+    </div>
+</div>

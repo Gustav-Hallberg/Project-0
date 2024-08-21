@@ -10,7 +10,6 @@ class App < Sinatra::Base
 
     get "/elever" do
         @elever = db.execute("SELECT * FROM elever ORDER BY class, name ASC")
-        p @elever
         erb :"elever/index"
     end
 
@@ -24,13 +23,32 @@ class App < Sinatra::Base
         erb :"elever/game"
     end
 
+    get "/elever/game/:class" do | selectedClass | 
+        sql = "SELECT * FROM elever WHERE class=?"
+        @result = db.execute(sql, selectedClass).to_json
+        erb :"elever/game"
+    end
+
+    get "/elever/class/:class" do | selectedClass | 
+        sql = "SELECT * FROM elever WHERE class=? ORDER BY name ASC"
+        @elever = db.execute(sql, selectedClass)
+        @class = selectedClass
+        erb :"elever/class"
+    end
+
     post "/elever/search" do 
-        name = params["elev-name"].capitalize();
+        search = params["elev-search"];
         sql = "SELECT * FROM elever WHERE name=?"
 
-        @elev = db.execute(sql, name).first
+        @elev = db.execute(sql, search.capitalize()).first
 
         if(@elev == nil)
+            sql = "SELECT * FROM elever WHERE class=?"
+            @class = db.execute(sql, search).first
+            if(@class != nil)
+                redirect("/elever/class/#{search}")
+            end
+
             redirect("/elever")
         end
 

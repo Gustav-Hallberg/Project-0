@@ -6,17 +6,17 @@
                 <% @currentClass = "" %>
                 <% @elever.each do | f | %>
                     <% if f["class"] == @currentClass%>
-                        <li class="elev-list"><a class="elev-list-item" href="elever/<%=f["id"]%>"> <%= f["name"]%> </a></li>
+                        <li class="elev-list"><a class="elev-list-item" href="/elever/<%=f["id"]%>"> <%= f["name"]%> </a></li>
                     <% else %>
                         <% @currentClass = f["class"] %>
                         <p><%=@currentClass%></p>
-                        <li class="elev-list"><a class="elev-list-item" href="elever/<%=f["id"]%>"> <%= f["name"]%> </a></li>
+                        <li class="elev-list"><a class="elev-list-item" href="/elever/<%=f["id"]%>"> <%= f["name"]%> </a></li>
                     <% end %>
                 <% end %>
             </ul>
         </div>
     </div>
     <div class="run-game">
-        <button class="run-game" onClick="window.location.href = 'elever/game'">Kör spel!</button>
+        <button class="run-game" onClick="window.location.href = '/elever/game'">Kör spel!</button>
     </div>
 </div>

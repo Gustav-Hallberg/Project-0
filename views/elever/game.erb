@@ -32,7 +32,7 @@
     function nextElev(elever, previusElev) {
         let nextElev = -1;
         while (nextElev == -1 || nextElev == previusElev) {
-            nextElev = Math.floor(Math.random() * elever.length - 1);
+            nextElev = Math.floor(Math.random() * elever.length);
         }
         return nextElev;
     }
@@ -43,7 +43,7 @@
         let description = document.getElementById("elev-show-desc");
         let input = document.getElementById("elev-guess-name");
 
-        image.src = "../images/" + elever[nextElevNumber].id + ".jpeg";
+        image.src = "/images/" + elever[nextElevNumber].id + ".jpeg";
         nameAge.textContent = "Rätt svar: " + elever[nextElevNumber].name + ", " + elever[nextElevNumber].age;
         description.textContent = elever[nextElevNumber].description;
     }
