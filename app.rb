@@ -63,8 +63,11 @@ class App < Sinatra::Base
     
     # Show info about 1 specific elev
     get "/elever/:id" do | id |
-        elev_sql = "SELECT * FROM elever WHERE id=?"
+        elev_sql = "SELECT * FROM elever LEFT JOIN elever_images ON elever.id = elever_images.id WHERE elever.id=?"
+        #elev_sql = "SELECT * FROM elever WHERE id=?"
         @elev = db.execute(elev_sql, id).first
+
+        p @elev
 
         elever_count_sql = "SELECT id FROM elever ORDER BY id DESC LIMIT 1"
         @elev_count = db.execute(elever_count_sql)
