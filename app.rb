@@ -64,8 +64,7 @@ class App < Sinatra::Base
     
     # Show info about 1 specific elev
     get "/elever/:id" do | id |
-        elev_sql = "SELECT * FROM elever LEFT JOIN elever_images ON elever.id = elever_images.id WHERE elever.id=?"
-        #elev_sql = "SELECT * FROM elever WHERE id=?"
+        elev_sql = "SELECT * FROM elever WHERE id=?"
         @elev = db.execute(elev_sql, id).first
 
         elever_count_sql = "SELECT id FROM elever ORDER BY id DESC LIMIT 1"
@@ -114,9 +113,11 @@ class App < Sinatra::Base
     end
 
     post "/elever/new/bulk" do
+        image_save_dir = "/images/upload/"
         Zip::File.open(params["zipfile"]["tempfile"]) do |zipfile|
             zipfile.each do |file|
 
+                # Get title info from pictures
                 # Removes weird irrelevant files
                 if(file.name.include?("__MACOSX"))
                     next
@@ -127,14 +128,30 @@ class App < Sinatra::Base
                     next
                 end
 
+                # Removes the prefix that is the zipfiles name
                 file.name = file.name.delete_prefix(params["zipfile"]["filename"].delete_suffix(".zip"))
-                file.name = file.name[1..file.name.index(".")-1]
                 
+                
+                # Removes file extention
+                file.name = file.name[1..-1]
+                
+                #p file.name
                 info_array = []
 
                 info_array = file.name.split("_")
 
-                p info_array
+                info_array[3] = info_array[3].split(".")[0]
+
+
+                info_array.append(image_save_dir+file.name)
+
+
+                elev_sql = "INSERT INTO elever (name, age, class, description, image_url) VALUES(?,?,?,?,?)"
+
+                db.execute(elev_sql, info_array)
+
+                # Store image
+                file.extract("public"+image_save_dir+file.name)
             end
         end
     end
