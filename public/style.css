@@ -170,6 +170,10 @@ button.run-game {
     padding: 20px;
 }
 
+#score-counter {
+    padding: 0 0 0 20px;
+}
+
 .elev-show-container {
     display: flexbox;
 }

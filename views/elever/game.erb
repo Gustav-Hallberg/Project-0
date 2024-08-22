@@ -1,5 +1,7 @@
 <h2 class="elev-show-subheader">Elev Info</h2>
 
+<h2 id="score-counter">Score: 0</h2>
+
 <div class="elev-show-container">
     <div class="elev-show-info-container">
         <div class="elev-show-image-container">
@@ -26,6 +28,7 @@
     // Receves the elever data
     let elever = JSON.parse(document.getElementById("elever-info").textContent);
     var previusElev = null;
+    var currentScore = 0;
 
     // In case elever dont exist return user to start page
     if (elever == null) {
@@ -64,6 +67,13 @@
         description.textContent = elever[nextElevNumber].description;
     }
 
+    // function to set score
+    function setScore(score) {
+        let scoreElement = document.getElementById("score-counter");
+
+        scoreElement.textContent = "Score: " + score;
+    }
+
     var nextElevNumber = nextElev(elever, previusElev);
     showElev(elever, nextElevNumber)
  
@@ -82,12 +92,20 @@
                 previusElev = nextElevNumber;
                 nextElevNumber = nextElev(elever, previusElev);
                 showElev(elever, nextElevNumber);
+                // Increses score
+                currentScore ++;
+                setScore(currentScore);
             }
             else {
                 input.value = "";
                 // Show correct answer
                 nameAge.style.display = "block";
                 input.style.display = "none";
+
+                // resets score
+                currentScore = 0;
+                setScore(currentScore);
+
                 // Wait 3s before showing next elev
                 setTimeout(() => {
                     // Building next elev
