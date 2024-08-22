@@ -95,10 +95,23 @@ class App < Sinatra::Base
         elev_class = params["elev_class"]
         elev_image = params["elev_image"]
 
-        p elev_image
+        fin = File.open elev_image["tempfile"] , "rb"
+        img = fin.read
+
+        blob = SQLite3::Blob.new img
 
         sql = "INSERT INTO elever (name, age, description, class) VALUES(?,?,?,?)"
+        image_sql = "INSERT INTO elever_images (id, image) VALUES(?,?)"
+        
+        db.execute("BEGIN TRANSACTION")
+        
         db.execute(sql, [name, age, description, elev_class])
+
+        image_id = db.last_insert_row_id
+
+        db.execute(image_sql, [image_id, blob])
+        
+        db.execute("COMMIT TRANSACTION")
 
         redirect("/elever")
     end
