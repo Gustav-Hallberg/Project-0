@@ -68,8 +68,6 @@ class App < Sinatra::Base
         #elev_sql = "SELECT * FROM elever WHERE id=?"
         @elev = db.execute(elev_sql, id).first
 
-        p @elev
-
         elever_count_sql = "SELECT id FROM elever ORDER BY id DESC LIMIT 1"
         @elev_count = db.execute(elever_count_sql)
 
