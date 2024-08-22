@@ -1,6 +1,6 @@
 require 'bundler'
 require 'json'
-require 'base64'
+require 'zip'
 Bundler.require
 require_relative 'app'
 run App

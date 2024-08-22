@@ -1,15 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    async (2.15.3)
-      console (~> 1.26)
-      fiber-annotation
-      io-event (~> 1.6, >= 1.6.5)
     base64 (0.2.0)
-    console (1.27.0)
-      fiber-annotation
-      fiber-local (~> 1.1)
-      json
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-arm-linux-gnu)
@@ -20,12 +12,6 @@ GEM
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     ffi (1.17.0-x86_64-linux-musl)
-    fiber-annotation (0.2.0)
-    fiber-local (1.1.0)
-      fiber-storage
-    fiber-storage (1.0.0)
-    io-event (1.6.5)
-    json (2.7.2)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -46,6 +32,7 @@ GEM
     rerun (0.14.0)
       listen (~> 3.0)
     ruby2_keywords (0.0.5)
+    rubyzip (2.3.2)
     sinatra (4.0.0)
       mustermann (~> 3.0)
       rack (>= 3.0.0, < 4)
@@ -78,12 +65,12 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  async
   rack
   rackup
   rerun
+  rubyzip
   sinatra
   sqlite3
 
 BUNDLED WITH
-   2.5.11
+   2.5.17

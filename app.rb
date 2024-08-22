@@ -113,6 +113,32 @@ class App < Sinatra::Base
         redirect("/elever")
     end
 
+    post "/elever/new/bulk" do
+        Zip::File.open(params["zipfile"]["tempfile"]) do |zipfile|
+            zipfile.each do |file|
+
+                # Removes weird irrelevant files
+                if(file.name.include?("__MACOSX"))
+                    next
+                end
+
+                # Removes non-images
+                if(!file.name.end_with?(".jpeg") && !file.name.end_with?(".png") && !file.name.end_with?(".jpg"))
+                    next
+                end
+
+                file.name = file.name.delete_prefix(params["zipfile"]["filename"].delete_suffix(".zip"))
+                file.name = file.name[1..file.name.index(".")-1]
+                
+                info_array = []
+
+                info_array = file.name.split("_")
+
+                p info_array
+            end
+        end
+    end
+
     # Remove elever in db
     post '/elever/:id/delete' do | id |
         sql = "DELETE FROM elever WHERE id=?"

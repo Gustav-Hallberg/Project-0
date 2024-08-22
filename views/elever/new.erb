@@ -6,6 +6,11 @@
 <label>Bild <input type="file" name="elev_image" id="elev_image" onchange="onFileSelected(event)"></label>
 <button onClick="Save()">Spara</button>
 
+<p>Bulk Upload</p>
+<form action="/elever/new/bulk" method="POST" enctype="multipart/form-data">
+    <input type="file" name="zipfile" accept=".zip">
+    <input type="submit" name="submit" value="Skicka">
+</form>
 
 <img style="display: none;" id="image" height="200">
 
