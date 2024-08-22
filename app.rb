@@ -21,14 +21,15 @@ class App < Sinatra::Base
 
     # Show elever game for all classes
     get "/elever/game" do 
-        sql = "SELECT * FROM elever"
+        sql = "SELECT * FROM elever LEFT JOIN elever_images ON elever.id = elever_images.id"
         @result = db.execute(sql).to_json
         erb :"elever/game"
     end
 
     # Show elever game for a spesific class
     get "/elever/game/:class" do | selectedClass | 
-        sql = "SELECT * FROM elever WHERE class=?"
+        sql = "SELECT * FROM elever LEFT JOIN elever_images ON elever.id = elever_images.id WHERE class=?"
+        
         @result = db.execute(sql, selectedClass).to_json
         erb :"elever/game"
     end
