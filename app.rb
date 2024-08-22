@@ -92,16 +92,11 @@ class App < Sinatra::Base
 
     # Adds new elev to db
     post "/elever" do
-        name = params["elev_name"]
-        description = params["elev_description"]
-        age = params["elev_age"]
-        elev_class = params["elev_class"]
-        elev_image = params["elev_image"]
-
-        fin = File.open elev_image["tempfile"] , "rb"
-        img = fin.read
-
-        blob = SQLite3::Blob.new img
+        name = params["name"]
+        description = params["description"]
+        age = params["age"]
+        elev_class = params["className"]
+        elev_image = params["image"]
 
         sql = "INSERT INTO elever (name, age, description, class) VALUES(?,?,?,?)"
         image_sql = "INSERT INTO elever_images (id, image) VALUES(?,?)"
@@ -112,7 +107,7 @@ class App < Sinatra::Base
 
         image_id = db.last_insert_row_id
 
-        db.execute(image_sql, [image_id, blob])
+        db.execute(image_sql, [image_id, elev_image])
         
         db.execute("COMMIT TRANSACTION")
 
