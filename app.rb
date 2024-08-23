@@ -26,6 +26,10 @@ class App < Sinatra::Base
         erb :"elever/game"
     end
 
+    get "/elever/game2" do
+        erb :"elever/game2"        
+    end
+
     # Show elever game for a spesific class
     get "/elever/game/:class" do | selectedClass | 
         sql = "SELECT * FROM elever LEFT JOIN elever_images ON elever.id = elever_images.id WHERE class=?"
