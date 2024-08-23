@@ -57,7 +57,11 @@ class App < Sinatra::Base
 
         @elev = db.execute(sql, search.capitalize()).first
 
+        p search.capitalize()
+
         if(@elev == nil)
+            p "We shouldnt be here"
+
             sql = "SELECT * FROM elever WHERE class=?"
             @class = db.execute(sql, search.upcase).first
             if(@class != nil)
@@ -146,6 +150,9 @@ class App < Sinatra::Base
                 
                 # Removes file extention
                 file.name = file.name[1..-1]
+
+                # Encodes to UTF-8
+                file.name = file.name.force_encoding("UTF-8")
 
                 info_array = file.name.split("_")
 
