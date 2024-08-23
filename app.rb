@@ -94,20 +94,11 @@ class App < Sinatra::Base
         description = params["description"]
         age = params["age"]
         elev_class = params["className"]
-        elev_image = params["image"]
+        elev_image = params["elev_image"]
 
-        sql = "INSERT INTO elever (name, age, description, class) VALUES(?,?,?,?)"
-        image_sql = "INSERT INTO elever_images (id, image) VALUES(?,?)"
+        sql = "INSERT INTO elever (name, age, description, class, image_url) VALUES(?,?,?,?,?)"
         
-        db.execute("BEGIN TRANSACTION")
-        
-        db.execute(sql, [name, age, description, elev_class])
-
-        image_id = db.last_insert_row_id
-
-        db.execute(image_sql, [image_id, elev_image])
-        
-        db.execute("COMMIT TRANSACTION")
+        db.execute(sql, [name, age, description, elev_class, elev_image])
 
         redirect("/elever")
     end

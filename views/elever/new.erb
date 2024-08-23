@@ -1,15 +1,18 @@
 
-<label>Namn <input type="text" name="elev_name" id="elev_name"></label>
-<label>Age <input type="number" name="elev_age" id="elev_age"></label>
-<label>Beskrivning <input type="text" name="elev_description" id="elev_description"></label>
-<label>Klass <input type="text" name="elev_class" id="elev_class"></label>
-<label>Bild <input type="file" name="elev_image" id="elev_image" onchange="onFileSelected(event)"></label>
-<button onClick="Save()">Spara</button>
+<p>Single Upload</p>
+<form action="/elever/new" method="POST" enctype="multipart/form-data">
+    <label>Namn <input type="text" name="elev_name" id="elev_name"></label>
+    <label>Age <input type="number" name="elev_age" id="elev_age"></label>
+    <label>Beskrivning <input type="text" name="elev_description" id="elev_description"></label>
+    <label>Klass <input type="text" name="elev_class" id="elev_class"></label>
+    <label>Bild <input type="file" name="elev_image" id="elev_image"></label>
+    <input type="submit" name="submit" value="Spara">
+</form>
 
 <p>Bulk Upload</p>
 <form action="/elever/new/bulk" method="POST" enctype="multipart/form-data">
     <input type="file" name="zipfile" accept=".zip">
-    <input type="submit" name="submit" value="Skicka">
+    <input type="submit" name="submit" value="Spara">
 </form>
 
 <img style="display: none;" id="image" height="200">
