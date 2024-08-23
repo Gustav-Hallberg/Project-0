@@ -175,22 +175,4 @@ class App < Sinatra::Base
 
         redirect("/elever")
     end
-
-    # Gives page to update elev in db
-    get '/elever/:id/edit' do | id |
-        sql = "SELECT * FROM elever WHERE id=?"
-        @elev = db.execute(sql, id).first
-        erb :"elever/update"
-    end
-
-    # Updates elev in db
-    post "/elever/:id/update" do | id |
-        name = params["elev_name"]
-        description = params["elev_description"]
-
-        sql = "UPDATE elever SET name=?, description=? WHERE id=?"
-        db.execute(sql, [name, description, id])
-
-        redirect("/elever/#{id}")
-    end
 end
