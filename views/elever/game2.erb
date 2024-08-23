@@ -1,0 +1,105 @@
+<h2 id="score-counter">Score: 0</h2>
+
+<div class="elev-show-name-age-container">
+    <p id="elev-show-name-age"></p>
+</div>
+
+<div id="image-button-container" class="image-button-container">
+    
+</div>
+
+
+<!-- Only there to be able to pass the sql result to the client -->
+<p id="elever-info" style="display: none" ><%= @result %></p>
+
+<script> 
+    // Receves the elever data
+    let elever = JSON.parse(document.getElementById("elever-info").textContent);
+    var previusElev = null;
+    var currentScore = 0;
+
+    // In case elever dont exist return user to start page
+    if (elever == null) {
+        window.location.href = "/elever";
+    }
+
+    // function to get next elev to show
+    function nextElev(elever, previusElev) {
+        let nextElev = -1;
+        
+        /* 
+            If there is only one elev there can only be 0.
+            Because of that previus will always be the same as next and crash the program
+        */
+        if (elever.length != 1) {
+            while (nextElev == -1 || nextElev == previusElev) {
+                nextElev = Math.floor(Math.random() * elever.length);
+            }
+        } 
+        else {
+            nextElev = 0;
+        }
+        
+        return nextElev;
+    }
+
+    // Shows the elev with the index thats given
+    function showButtons(elever, nextElevNumber) {
+        let buttonContainer = document.getElementById("image-button-container");  
+        let nameAge = document.getElementById("elev-show-name-age");
+
+        buttonContainer.innerHTML = "";
+        buildButtons(elever);
+        
+        nameAge.textContent = "Vem är: " + elever[nextElevNumber].name;
+    }
+
+    function buildButtons(elever) {
+        elever.forEach(buildButton);
+    }
+
+    function buildButton(elev, index) {
+        let buttonContainer = document.getElementById("image-button-container");     
+
+        let newButton = document.createElement("button");
+        let buttonImage = document.createElement("img");
+
+        newButton.classList.add("image-button");
+        newButton.onclick = () => elevSelect(elev);
+
+        buttonImage.classList.add("button-image");
+        buttonImage.src = elev["image_url"];
+
+        newButton.appendChild(buttonImage);
+        buttonContainer.appendChild(newButton);
+    }
+    // function to set score
+    function setScore(score) {
+        let scoreElement = document.getElementById("score-counter");
+        scoreElement.textContent = "Score: " + score;
+    }
+
+    function elevSelect(elev) {
+        console.log(elev.name);
+        let correctElev = document.getElementById("elev-show-name-age").textContent.split(": ")[1];
+        if (correctElev == elev.name) {
+            currentScore++;
+        }
+        else {
+            currentScore = 0;
+        }
+
+        setScore(currentScore);
+        previousElev = nextElevNumber;
+        nextElevNumber = nextElev(elever, previousElev);
+        showButtons(elever, nextElevNumber);
+    }
+
+    var nextElevNumber = nextElev(elever, previusElev);
+    showButtons(elever, nextElevNumber)
+    
+</script>
+
+
+
+

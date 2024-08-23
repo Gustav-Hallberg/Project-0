@@ -1,240 +1,279 @@
 body {
-    font-family: serif;
+  font-family: serif;
+  overflow-x: hidden;
 }
 
 h1,
 h2,
 h3 {
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 #homeButton {
-    margin: 0;
-    height: 3em;
-    width: 4em;
+  margin: 0;
+  height: 3em;
+  width: 4em;
 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url("images/home-icon.png");
-    background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("images/home-icon.png");
+  background-color: white;
 
-    border-color: white;
+  border-color: white;
 }
 
 div.top {
-    display: flex;
-    align-items: center;
-    width: 100vw;
-    padding: 20px;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  padding: 20px;
 }
 div.topButton {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 2em;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 2em;
 }
 div.topMain {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: calc(100% - 2em);
-    padding-right: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: calc(100% - 2em);
+  padding-right: 2em;
 }
 div.index {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }
 div.elever {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    height: 100%
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 100%;
 }
 div.elever-list {
-    overflow-y: scroll;
-    max-height: 500px;
+  overflow-y: scroll;
+  max-height: 500px;
 }
 div.run-game {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
 }
 
 h1.top {
-    margin: 0;
+  margin: 0;
 }
 h2.elever {
-    margin: 0;
+  margin: 0;
 }
 a.elev-list-item {
-    margin: 0;
-    font-weight: bold;
-    font-size: 20px;
-    text-decoration: none;
+  margin: 0;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
 }
 
 .elev-list {
-    list-style: none;
+  list-style: none;
 }
 
 form.top {
-    display: flex;
-    align-items: center;
-    margin-left: 1%;
+  display: flex;
+  align-items: center;
+  margin-left: 1%;
 }
 input.top {
-    margin: 0;
-    border-radius: 5px;
-    height: 2em;
+  margin: 0;
+  border-radius: 5px;
+  height: 2em;
 }
 input.topSubmit {
-    width: 2em;
-    height: 2em;
+  width: 2em;
+  height: 2em;
 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url("images/search-icon.png");
-    background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("images/search-icon.png");
+  background-color: white;
 
-    border-top-right-radius: 30%;
-    border-bottom-right-radius: 30%;
+  border-top-right-radius: 30%;
+  border-bottom-right-radius: 30%;
 }
 button.run-game {
-    font-size: xx-large;
-    color: black;
-    background-color: greenyellow;
+  font-size: xx-large;
+  color: black;
+  background-color: greenyellow;
 }
 
 .elev-names {
-    font-weight: bold;
-    list-style: none;
+  font-weight: bold;
+  list-style: none;
 }
 
 .header-links {
-    margin: 5px;
-    padding: 5px;
+  margin: 5px;
+  padding: 5px;
 }
 
 .elev-cards {
-    display: inline-flex;
-    margin: 10px;
-    padding: 15px;
-    border: black solid 2px;
-    border-radius: 5px;
-    width: 20%;
-    justify-content: space-between;
-    align-items: center;
+  display: inline-flex;
+  margin: 10px;
+  padding: 15px;
+  border: black solid 2px;
+  border-radius: 5px;
+  width: 20%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .elev-delete-button {
-    padding: 5px;
-    text-align: center;
-    font-size: bold;
-    color:red;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: transparent;
-    cursor: pointer;
+  padding: 5px;
+  text-align: center;
+  font-size: bold;
+  color: red;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .elev-delete-button:hover {
-    background-color: red;
-    color: white;
+  background-color: red;
+  color: white;
 }
 
 .elev-cards .elev-change {
-    padding: 5px;
-    text-align: center;
-    color:green;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: transparent;
-    cursor: pointer;
-    text-decoration: none;
+  padding: 5px;
+  text-align: center;
+  color: green;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-
 .elev-cards .elev-change:hover {
-    background-color: green;
-    color: white;
+  background-color: green;
+  color: white;
 }
 
 /* show.erb */
 .elev-show-subheader {
-    padding: 20px;
+  padding: 20px;
 }
 
 #score-counter {
-    padding: 0 0 0 20px;
+  padding: 0 0 0 20px;
 }
 
 .elev-show-container {
-    display: flexbox;
+  display: flexbox;
 }
 
 .elev-show-info-container {
-    display: inline-flex;
-    padding: 20px;
-    margin: 20px;
+  display: inline-flex;
+  padding: 20px;
+  margin: 20px;
 }
 
 .elev-show-image-container {
-    margin-right: 50px;
-    justify-content: center;
-    align-items: center;
+  margin-right: 50px;
+  justify-content: center;
+  align-items: center;
 }
 
 .elev-show-image-container img {
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-    border: solid 2px black;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  border: solid 2px black;
 }
 
 .elev-show-personal-container {
-    display: flexbox;
+  display: flexbox;
 }
 
 .elev-show-name-container p {
-    font-weight: bolder;
-    font-size: 30px;
-    margin: 0;
+  font-weight: bolder;
+  font-size: 30px;
+  margin: 0;
 }
 
 input.elev-guess-name {
-    font-weight: bolder;
-    font-size: 30px;
+  font-weight: bolder;
+  font-size: 30px;
+}
+
+.elev-show-name-age-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#elev-show-name-age {
+  margin: 0 0 10px 0;
+  font-weight: bolder;
+  font-size: 30px;
+}
+
+.image-button-container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto auto auto auto;
+}
+
+.image-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  margin: 0 0 20px 10px;
+  padding: 0;
+}
+
+.image-button:hover {
+  cursor: pointer;
+}
+
+.button-image {
+  width: 100%;
+  height: 100%;
 }
 
 .elev-show-desc-container p {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .elev-show-button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding:10px;
-    margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
 }
 
 .elev-show-button-container a {
-    text-decoration: none;
-    font-size: 20px;
-    border: solid black 2px;
-    border-radius: 5px;
-    padding: 10px;
-    color: rgb(0, 98, 255);
+  text-decoration: none;
+  font-size: 20px;
+  border: solid black 2px;
+  border-radius: 5px;
+  padding: 10px;
+  color: rgb(0, 98, 255);
 }
 
 .elev-show-button-container a:hover {
-    cursor: pointer;
-    background-color: rgb(0, 98, 255);
-    color: white;
+  cursor: pointer;
+  background-color: rgb(0, 98, 255);
+  color: white;
 }
+
