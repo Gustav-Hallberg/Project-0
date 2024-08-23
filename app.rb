@@ -111,11 +111,11 @@ class App < Sinatra::Base
                     IO.copy_stream(input, f)
                 end
             end
+            sql = "INSERT INTO elever (name, age, description, class, image_url) VALUES(?,?,?,?,?)"
+            
+            db.execute(sql, [name, age, description, elev_class, image_save_dir+elev_image["filename"]])
         end
 
-        sql = "INSERT INTO elever (name, age, description, class, image_url) VALUES(?,?,?,?,?)"
-        
-        db.execute(sql, [name, age, description, elev_class, image_save_dir+elev_image["filename"]])
 
         redirect("/elever")
     end
@@ -142,8 +142,7 @@ class App < Sinatra::Base
                 
                 # Removes file extention
                 file.name = file.name[1..-1]
-                
-                #p file.name
+
                 info_array = file.name.split("_")
 
                 info_array[3] = info_array[3].split(".")[0]
