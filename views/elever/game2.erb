@@ -80,7 +80,7 @@
     }
 
     function elevSelect(elev) {
-        console.log(elev.name);
+        window.scrollTo(0, 0); 
         let correctElev = document.getElementById("elev-show-name-age").textContent.split(": ")[1];
         if (correctElev == elev.name) {
             currentScore++;
