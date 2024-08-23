@@ -93,16 +93,25 @@ class App < Sinatra::Base
     end
 
     # Adds new elev to db
-    post "/elever" do
-        name = params["name"]
-        description = params["description"]
-        age = params["age"]
-        elev_class = params["className"]
+    post "/elever/new" do
+        image_save_dir = "/images/upload/"
+
+        name = params["elev_name"]
+        description = params["elev_description"]
+        age = params["elev_age"]
+        elev_class = params["elev_class"]
         elev_image = params["elev_image"]
+
+        File.open("public"+image_save_dir+elev_image["filename"], "w") do | f |
+            File.open(elev_image["tempfile"], "r") do | input |
+                IO.copy_stream(input, f)
+            end
+        end
+
 
         sql = "INSERT INTO elever (name, age, description, class, image_url) VALUES(?,?,?,?,?)"
         
-        db.execute(sql, [name, age, description, elev_class, elev_image])
+        db.execute(sql, [name, age, description, elev_class, image_save_dir+elev_image["filename"]])
 
         redirect("/elever")
     end
