@@ -10,7 +10,7 @@ class App < Sinatra::Base
 
     # Elever start page
     get "/elever" do
-        @elever = db.execute("SELECT * FROM elever ORDER BY class, name DESC")
+        @elever = db.execute("SELECT * FROM elever ORDER BY class, name ASC")
         erb :"elever/index"
     end
 
@@ -60,8 +60,6 @@ class App < Sinatra::Base
         p search.capitalize()
 
         if(@elev == nil)
-            p "We shouldnt be here"
-
             sql = "SELECT * FROM elever WHERE class=?"
             @class = db.execute(sql, search.upcase).first
             if(@class != nil)
