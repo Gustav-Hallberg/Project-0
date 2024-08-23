@@ -10,7 +10,7 @@ class App < Sinatra::Base
 
     # Elever start page
     get "/elever" do
-        @elever = db.execute("SELECT * FROM elever ORDER BY class, name ASC")
+        @elever = db.execute("SELECT * FROM elever ORDER BY class, name DESC")
         erb :"elever/index"
     end
 
@@ -97,16 +97,29 @@ class App < Sinatra::Base
     end
 
     # Adds new elev to db
-    post "/elever" do
-        name = params["name"]
-        description = params["description"]
-        age = params["age"]
-        elev_class = params["className"]
+    post "/elever/new" do
+        image_save_dir = "/images/upload/"
+
+        name = params["elev_name"]
+        description = params["elev_description"]
+        age = params["elev_age"]
+        elev_class = params["elev_class"]
         elev_image = params["elev_image"]
 
-        sql = "INSERT INTO elever (name, age, description, class, image_url) VALUES(?,?,?,?,?)"
-        
-        db.execute(sql, [name, age, description, elev_class, elev_image])
+        # Checks if file exists
+        if(!File.exists?("public"+image_save_dir+elev_image["filename"]))
+
+            # Creates a new file at directory and copies tempfile data to new file
+            File.open("public"+image_save_dir+elev_image["filename"], "w") do | f |
+                File.open(elev_image["tempfile"], "r") do | input |
+                    IO.copy_stream(input, f)
+                end
+            end
+            sql = "INSERT INTO elever (name, age, description, class, image_url) VALUES(?,?,?,?,?)"
+            
+            db.execute(sql, [name, age, description, elev_class, image_save_dir+elev_image["filename"]])
+        end
+
 
         redirect("/elever")
     end
@@ -133,17 +146,12 @@ class App < Sinatra::Base
                 
                 # Removes file extention
                 file.name = file.name[1..-1]
-                
-                #p file.name
-                info_array = []
 
                 info_array = file.name.split("_")
 
                 info_array[3] = info_array[3].split(".")[0]
 
-
                 info_array.append(image_save_dir+file.name)
-
 
                 elev_sql = "INSERT INTO elever (name, age, class, description, image_url) VALUES(?,?,?,?,?)"
 

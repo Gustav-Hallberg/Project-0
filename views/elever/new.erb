@@ -1,11 +1,11 @@
 
 <p>Single Upload</p>
 <form action="/elever/new" method="POST" enctype="multipart/form-data">
-    <label>Namn <input type="text" name="elev_name" id="elev_name"></label>
-    <label>Age <input type="number" name="elev_age" id="elev_age"></label>
-    <label>Beskrivning <input type="text" name="elev_description" id="elev_description"></label>
-    <label>Klass <input type="text" name="elev_class" id="elev_class"></label>
-    <label>Bild <input type="file" name="elev_image" id="elev_image"></label>
+    <label>Namn <input type="text" name="elev_name"></label>
+    <label>Age <input type="number" name="elev_age"></label>
+    <label>Beskrivning <input type="text" name="elev_description"></label>
+    <label>Klass <input type="text" name="elev_class"></label>
+    <label>Bild <input type="file" name="elev_image"></label>
     <input type="submit" name="submit" value="Spara">
 </form>
 
@@ -14,70 +14,3 @@
     <input type="file" name="zipfile" accept=".zip">
     <input type="submit" name="submit" value="Spara">
 </form>
-
-<img style="display: none;" id="image" height="200">
-
-<script>
-
-    /**
-     * sends a request to the specified url from a form. this will change the window location.
-     * @param {string} path the path to send the post request to
-     * @param {object} params the parameters to add to the url
-     * @param {string} [method=post] the method to use on the form
-     */
-
-    function post(path, params, method='post') {
-
-        // The rest of this code assumes you are not using a library.
-        // It can be made less verbose if you use one.
-        const form = document.createElement('form');
-        form.method = method;
-        form.action = path;
-
-        for (const key in params) {
-            if (params.hasOwnProperty(key)) {
-            const hiddenField = document.createElement('input');
-            hiddenField.type = 'hidden';
-            hiddenField.name = key;
-            hiddenField.value = params[key];
-
-            form.appendChild(hiddenField);
-            }
-        }
-
-        document.body.appendChild(form);
-        form.submit();
-    }
-
-
-    function Save() {
-        let name = document.getElementById("elev_name").value.toString();
-        let age = document.getElementById("elev_age").value;
-        let description = document.getElementById("elev_description").value.toString();
-        let className = document.getElementById("elev_class").value.toString();
-        let image = document.getElementById("image").src;
-
-        post('/elever', {
-            name: name,
-            age: age,
-            description: description,
-            className: className,
-            image: image
-        });
-        
-    }
-
-    function onFileSelected(event) {
-        var selectedFile = event.target.files[0];
-        var reader = new FileReader();
-
-        var imgtag = document.getElementById("image");
-        imgtag.title = selectedFile.name;
-
-        reader.onload = function(event) {
-            imgtag.src = event.target.result;
-        };
-
-        reader.readAsDataURL(selectedFile);
-    }
-</script>
